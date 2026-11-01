@@ -69,7 +69,7 @@ class PracticePage(BasePage):
         """
         dropdown.select_by_label(label)
 
-     # noinspection PyMethodMayBeStatic
+    # noinspection PyMethodMayBeStatic
     def select_by_value(self, dropdown: Dropdown, value: str) -> None:
         """
         Select an option in the given dropdown by its value attribute.
