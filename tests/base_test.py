@@ -63,11 +63,20 @@ def assert_checked(description: str, element):
     """
     BaseTest().assert_checked(description=description, element=element)
 
+
 def assert_unchecked(description: str, element):
     """
     Call assert_unchecked method of BaseTest class
     """
     BaseTest().assert_unchecked(description=description, element=element)
+
+
+def assert_selected(description: str, element, expected_value: str, timeout: int = 10000):
+    """
+    Call assert_selected method of BaseTest class
+    """
+    BaseTest().assert_selected(description=description, element=element, expected_value=expected_value,
+                               timeout=timeout)
 
 
 class BaseTest(Assertion):
@@ -230,3 +239,24 @@ class BaseTest(Assertion):
             Assertion.logger_error(description, "un-checked", "checked")
             raise e
         self.assert_equal(description, False, BaseElement(element).is_checked())
+
+    def assert_selected(self, description: str, element, expected_value: str, timeout: int = 10000):
+        """
+        Assert that a dropdown's selected value equals `expected_value`, retrying until it matches
+        or `timeout` ms pass.
+
+        Args:
+            description: What is being verified, e.g. "Verify Option2 is selected."
+            element: Dropdown element whose selected value is checked.
+            expected_value: Expected value attribute of the selected option, e.g. "option2".
+            timeout: Maximum time to wait for the value to match, in milliseconds.
+
+        Raises:
+            AssertionError: If the selected value does not match within `timeout`.
+        """
+        try:
+            expect(element.locator).to_have_value(expected_value, timeout=timeout)
+        except AssertionError:
+            Assertion.logger_error(description, expected_value, element.get_selected_value())
+            raise
+        self.assert_equal(description, expected_value, element.get_selected_value())
