@@ -58,21 +58,25 @@ class PracticePage(BasePage):
         """
         checkbox.uncheck()
 
-    def select_by_label(self, label: str):
+    # noinspection PyMethodMayBeStatic
+    def select_by_label(self, dropdown: Dropdown, label: str) -> None:
         """
-        Select an option from the dropdown by its visible text (label).
+        Select an option in the given dropdown by its visible text.
 
         Args:
-            label: The visible text of the option to select.
+            dropdown (Dropdown): The dropdown to use, e.g. self.drp_options.
+            label (str): Visible text of the option, e.g. "Option2".
         """
-        self.drp_options.select_by_label(label)
+        dropdown.select_by_label(label)
 
-    def select_by_value(self, value: str):
+     # noinspection PyMethodMayBeStatic
+    def select_by_value(self, dropdown: Dropdown, value: str) -> None:
         """
-        Select the option with the given value attribute.
+        Select an option in the given dropdown by its value attribute.
 
         Args:
+            dropdown (Dropdown): The dropdown to use, e.g. self.drp_options.
             value (str): Value attribute of the option, e.g. "option2".
         """
-        self.drp_options.select_by_value(value)
+        dropdown.select_by_value(value)
 

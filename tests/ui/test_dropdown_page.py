@@ -39,7 +39,7 @@ class TestDropdownPage(BaseTest):
     def test_dropdown_select_by_label(self, practice_page, _option_name, _option_value):
         """@priority P4 @owner Shantanu @feature dropdown"""
         log_information(f"Select '{_option_name}' from the dropdown by its visible text")
-        practice_page.select_by_label(_option_name)
+        practice_page.select_by_label(practice_page.drp_options, _option_name)
 
         log_information("Verify the selected option's text and value")
         assert_selected(f"Verify {_option_name} is selected", practice_page.drp_options, _option_value)
@@ -53,7 +53,7 @@ class TestDropdownPage(BaseTest):
     def test_dropdown_select_by_value(self, practice_page, _option_name, _option_value):
         """@priority P4 @owner Shantanu @feature dropdown"""
         log_information(f"Select '{_option_value}' from the dropdown by its value")
-        practice_page.select_by_value(_option_value)
+        practice_page.select_by_label(practice_page.drp_options, _option_name)
 
         log_information("Verify the selected option's text and value")
         assert_selected(f"Verify {_option_name} is selected", practice_page.drp_options, _option_value)

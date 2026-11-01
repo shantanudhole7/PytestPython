@@ -11,7 +11,7 @@ class Dropdown(BaseElement):
         Select an option by its visible text (label).
 
         Args:
-            label: The visible text of the option to select, e.g. "option1".
+            label: The visible text of the option to select, e.g. "Option1".
         """
         self.locator.select_option(label=label)
 
@@ -33,7 +33,7 @@ class Dropdown(BaseElement):
         """
         self.locator.select_option(index=index)
 
-    def get_selected_option(self):
+    def get_selected_option(self) -> str:
         """
         Get the visible text of the selected option.
 

@@ -43,7 +43,7 @@ report code.
 ## Layout
 
 - `pages/` page objects (inherit `BasePage`); `pages/core/` element wrappers `BaseElement`, `Input`, `Button`, `Label`,
-  `Dialog`
+  `Dialog`, `Checkbox`, `Radio`, `Dropdown`
 - `api/` API classes (inherit `ApiBase`); `pojo/` dataclasses for request bodies; `data/` JSON payloads and shared test
   data
 - `fixtures/` pytest plugins registered in `conftest.py` via `pytest_plugins` (tests never import fixture modules)
@@ -62,7 +62,8 @@ report code.
 - No locators or hard-coded values in tests. Per-file values are UPPERCASE class constants; shared settings in
   `config.ini`; structured data in `data/`.
 - Assert only through `tests/base_test.py` helpers (`assert_equal`, `assert_text`, `assert_displayed`, `assert_count`,
-  `assert_url`, `assert_http_ok`), never bare `assert` in tests.
+  `assert_url`, `assert_http_ok`, `assert_checked`, `assert_unchecked`, `assert_selected`), never bare `assert` in
+  tests.
 - No `time.sleep()` or `wait_for_timeout()`; rely on auto-waiting and `expect`.
 - Every test has: `@pytest.mark.description("Verify ...")`, `ui` or `api`, one severity marker (`blocker`/`critical`/
   `major`/`minor`/`trivial`), and the reporting-labs docstring `"""@priority P1 @owner Shantanu @feature <area>"""`.
