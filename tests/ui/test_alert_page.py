@@ -1,4 +1,5 @@
 import pytest
+
 from config.config import PRACTICEURL, POPUPSPATH
 from pages.alert_page import AlertPage
 from tests.base_test import BaseTest, log_information, assert_equal, assert_text

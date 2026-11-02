@@ -1,4 +1,5 @@
 import pytest
+
 from config.config import PRACTICEURL, WINDOWOPERATIONSPATH
 from pages.window_page import WindowPage
 from tests.base_test import BaseTest, log_information, assert_text

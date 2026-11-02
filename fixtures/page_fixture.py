@@ -1,6 +1,7 @@
 import pytest
-from config.config import BASEURL, PRACTICEURL
+from config.config import BASEURL, PRACTICEURL, WEBFORMURL
 from pages.login_page import LoginPage
+from pages.practice_page import PracticePage
 
 
 @pytest.fixture
@@ -41,3 +42,19 @@ def navigate_url(init_page, url):
     """
     init_page.goto(url, wait_until="domcontentloaded")
     yield init_page
+
+
+@pytest.fixture
+def practice_page(init_page):
+    """
+    Open the Automation Practice page (WEBFORMURL) and return its PracticePage object.
+
+    Args:
+        init_page (new_page): Playwright page object.
+
+    Returns:
+        PracticePage: The PracticePage object.
+    """
+    _practice_page = PracticePage(init_page)
+    _practice_page.navigate(WEBFORMURL)
+    yield _practice_page

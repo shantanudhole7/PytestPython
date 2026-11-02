@@ -219,6 +219,7 @@ Fixture modules are registered in `conftest.py` through `pytest_plugins`; tests 
 | `create_product`      | function | Creates a product and returns its id; the product is deleted after the test     |
 | `delete_product`      | function | A list of product ids to delete after the test (skipped with `skip_teardown`)   |
 | `log_test_boundaries` | autouse  | Logs START, the description and END of every test                               |
+| `practice_page`       | function | The shared tab on `WEBFORMURL`, as a `PracticePage`                             |
 
 Overriding `url` for one test file:
 

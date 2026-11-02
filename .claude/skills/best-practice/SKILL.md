@@ -93,20 +93,20 @@ pytest_plugins = ["fixtures.logging_fixture", "fixtures.browser_fixture", ...]
 
 ## 2. Naming Conventions
 
-| Item                          | Convention                                       | Example                                          |
-|-------------------------------|--------------------------------------------------|--------------------------------------------------|
-| Test file                     | `test_<page_name>.py`, snake_case                | `test_login_page.py`, `test_create_order_api.py` |
-| Page file                     | `<page_name>_page.py`                            | `login_page.py`                                  |
-| API file                      | `<name>_api.py`                                  | `create_order_api.py`                            |
-| Fixture file                  | `<type>_fixture.py`                              | `browser_fixture.py`                             |
-| Test class                    | `Test` + PascalCase name, matching the file      | `TestLoginPage`, `TestCreateOrderApi`            |
-| Base test class               | `BaseTest` (never `TestBase`)                    | `BaseTest`                                       |
-| Test method                   | `test_<behaviour>`, snake_case                   | `test_valid_user_login`, `test_invalid_password` |
-| Page / helper method          | verb first, snake_case                           | `login`, `get_error_message`                     |
-| Local variable                | `_` prefix, snake_case                           | `_page`, `_login_page`, `_error_message`         |
-| Page-object element attribute | element-type prefix, snake_case                  | `input_username`, `btn_login`                    |
-| Config constant               | UPPERCASE, defined in `config/config.py`         | `BASEURL`, `APPUSERNAME`                         |
-| Test-class constant           | UPPERCASE, defined at the top of the test class  | `FIRST_NAME_ERROR_MESSAGE`                       |
+| Item                          | Convention                                      | Example                                          |
+|-------------------------------|-------------------------------------------------|--------------------------------------------------|
+| Test file                     | `test_<page_name>.py`, snake_case               | `test_login_page.py`, `test_create_order_api.py` |
+| Page file                     | `<page_name>_page.py`                           | `login_page.py`                                  |
+| API file                      | `<name>_api.py`                                 | `create_order_api.py`                            |
+| Fixture file                  | `<type>_fixture.py`                             | `browser_fixture.py`                             |
+| Test class                    | `Test` + PascalCase name, matching the file     | `TestLoginPage`, `TestCreateOrderApi`            |
+| Base test class               | `BaseTest` (never `TestBase`)                   | `BaseTest`                                       |
+| Test method                   | `test_<behaviour>`, snake_case                  | `test_valid_user_login`, `test_invalid_password` |
+| Page / helper method          | verb first, snake_case                          | `login`, `get_error_message`                     |
+| Local variable                | `_` prefix, snake_case                          | `_page`, `_login_page`, `_error_message`         |
+| Page-object element attribute | element-type prefix, snake_case                 | `input_username`, `btn_login`                    |
+| Config constant               | UPPERCASE, defined in `config/config.py`        | `BASEURL`, `APPUSERNAME`                         |
+| Test-class constant           | UPPERCASE, defined at the top of the test class | `FIRST_NAME_ERROR_MESSAGE`                       |
 
 Element-type prefixes: `input_`, `btn_`, `alert_`, `lnk_`, `chk_`, `lbl_`, `drp_`, `lst_` (a list of items).
 
@@ -156,7 +156,7 @@ app_username = standard_user
 # config/config.py — one UPPERCASE constant per key
 BASEURL = _ini.get("url", "base_url")
 APPUSERNAME = _ini.get("credentials", "app_username")
-APIUSERPASSWORD = os.getenv("APIUSERPASSWORD")   # secret, from .env
+APIUSERPASSWORD = os.getenv("APIUSERPASSWORD")  # secret, from .env
 ```
 
 ```python
@@ -332,6 +332,7 @@ edit.
 | `auth`           | session  | Logs in once; `Auth(context, token, user_id)`                                                                                     |
 | `create_product` | function | Creates a product and registers it for deletion after the test                                                                    |
 | `delete_product` | function | List of product ids deleted after the test; skipped when the test is marked `skip_teardown`                                       |
+| `practice_page`  | function | The shared tab on `WEBFORMURL`, as a `PracticePage`                                                                               |
 
 - UI tests start from `login_page`, `navigate_url`, or a test-class fixture built on them. Never call
   `new_page()` for the test's main page; reuse the shared tab, so a file runs in one window.
@@ -444,8 +445,8 @@ assert_text("Verify wrong credential error.", _login_page.alert_error, LOGINERRO
 ```python
 # DON'T
 self.assert_equal("Verify wrong credential error.", LOGINERROR, _error_message)  # use the function
-expect(_login_page.alert_error.locator).to_have_text(LOGINERROR)                 # bypasses logging
-assert _error_message == LOGINERROR                                              # bypasses logging
+expect(_login_page.alert_error.locator).to_have_text(LOGINERROR)  # bypasses logging
+assert _error_message == LOGINERROR  # bypasses logging
 ```
 
 ### Rules
@@ -478,7 +479,7 @@ class BaseTest(Assertion):
             Assertion.logger_error(description, "enabled", f"not enabled within {timeout} ms")
             raise
 ```
-  Methods take core elements (`Input`, `Button`, `BaseElement`) or the Playwright page, not raw locators.
+- Methods take core elements (`Input`, `Button`, `BaseElement`) or the Playwright page, not raw locators.
 - Raise timeouts only for known slow operations.
 - Navigate with `page.goto(url)` and then assert on an element of the target page. For pages that embed slow
   third-party content (iframes, widgets), navigate with `wait_until="domcontentloaded"`. Avoid
