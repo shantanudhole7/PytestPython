@@ -1,6 +1,5 @@
 import pytest
-from config.config import WEBFORMURL
-from pages.practice_page import PracticePage
+
 from tests.base_test import BaseTest, log_information, assert_equal, assert_selected
 
 
@@ -11,26 +10,6 @@ class TestDropdownPage(BaseTest):
 
     EXPECTED_OPTIONS = ["Select", "Option1", "Option2", "Option3"]
     OPTIONS = [("Option1", "option1"), ("Option2", "option2"), ("Option3", "option3")]
-
-    @pytest.fixture
-    def url(self):
-        """
-        Open the Automation Practice page instead of the default PRACTICEURL.
-        """
-        return WEBFORMURL
-
-    @pytest.fixture
-    def practice_page(self, navigate_url) -> PracticePage:
-        """
-        Open WEBFORMURL and return it as a PracticePage.
-
-        Args:
-            navigate_url: The shared tab, already on WEBFORMURL.
-
-        Returns:
-            PracticePage: The practice page object.
-        """
-        return PracticePage(navigate_url)
 
     @pytest.mark.description("Verify an option can be selected in the dropdown by its visible text.")
     @pytest.mark.ui

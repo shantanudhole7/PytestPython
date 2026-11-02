@@ -93,3 +93,5 @@ Add one line per decision so future sessions keep it.
   test_checkbox_page.py / TestCheckboxPage, ...), an agreed exception to test_<page_name>.py.
 - 2026-10-28: Failed tests are retried after the whole run, in original order (`fixtures/retry_fixture.py`), not
   immediately as pytest-rerunfailures does.
+- 2026-11-02: PracticePage widget tests share the practice_page fixture in fixtures/page_fixture.py instead of per-file
+  url overrides.

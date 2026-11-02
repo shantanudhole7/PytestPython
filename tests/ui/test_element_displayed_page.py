@@ -1,30 +1,9 @@
 import pytest
-from config.config import WEBFORMURL
-from pages.practice_page import PracticePage
+
 from tests.base_test import BaseTest, log_information, assert_displayed, assert_hidden
 
 
 class TestElementDisplayedPage(BaseTest):
-
-    @pytest.fixture
-    def url(self):
-        """
-        Open the Automation Practice page instead of the default PRACTICEURL.
-        """
-        return WEBFORMURL
-
-    @pytest.fixture
-    def practice_page(self, navigate_url) -> PracticePage:
-        """
-        Open WEBFORMURL and return it as a PracticePage.
-
-        Args:
-            navigate_url: The shared tab, already on WEBFORMURL.
-
-        Returns:
-            PracticePage: The practice page object.
-        """
-        return PracticePage(navigate_url)
 
     @pytest.mark.description("Verify the text box is displayed when the page opens.")
     @pytest.mark.ui
@@ -61,4 +40,3 @@ class TestElementDisplayedPage(BaseTest):
 
         log_information("Verify the text box is displayed again")
         assert_displayed("Verify the text box is displayed again", practice_page.input_hide_show_example)
-

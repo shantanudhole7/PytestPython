@@ -1,27 +1,9 @@
 import pytest
-from config.config import WEBFORMURL
-from pages.practice_page import PracticePage
+
 from tests.base_test import BaseTest, log_information, assert_checked, assert_unchecked
 
 
 class TestCheckboxPage(BaseTest):
-
-    @pytest.fixture
-    def url(self):
-        return WEBFORMURL
-
-    @pytest.fixture
-    def practice_page(self, navigate_url) -> PracticePage:
-        """
-        Open WEBFORMURL and return it as a PracticePage.
-
-        Args:
-            navigate_url: The shared tab, already on WEBFORMURL.
-
-        Returns:
-            PracticePage: The practice page object.
-        """
-        return PracticePage(navigate_url)
 
     @pytest.mark.description("Verify a checkbox can be checked and un-checked.")
     @pytest.mark.ui
