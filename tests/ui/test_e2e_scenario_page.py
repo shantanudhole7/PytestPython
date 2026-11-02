@@ -1,4 +1,5 @@
 import pytest
+
 from config.config import APPUSERNAME, PASSWORD
 from data.product import CART_PRODUCT_NAMES
 from tests.base_test import BaseTest, log_information, assert_text, assert_displayed

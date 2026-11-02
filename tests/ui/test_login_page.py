@@ -1,4 +1,5 @@
 import pytest
+
 from config.config import APPUSERNAME, PASSWORD, HOMEPAGEHEADING, BASEURL, LOCKEDUSERERROR, LOGINERROR, WRONGPASSWORD, \
     LOCKEDUSERNAME, INVENTORYPATH
 from tests.base_test import BaseTest, log_information, assert_url, assert_text
