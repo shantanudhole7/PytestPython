@@ -26,4 +26,4 @@ class CheckoutCompletePage(BasePage):
         Returns:
             bool: True if the back home page is displayed, False otherwise.
         """
-        return self.btn_back_home.is_displayed()
+        return self.btn_back_home.is_visible()

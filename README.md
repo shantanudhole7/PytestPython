@@ -236,7 +236,7 @@ Every locator lives in a page-object constructor and is wrapped in a typed eleme
 offers actions that make sense for it.
 
 ```
-BaseElement   is_displayed, is_visible, get_text, get_attribute, get_count, click, focus, press, screenshot
+BaseElement   is_hidden, is_visible, get_text, get_attribute, get_count, click, focus, press, screenshot
  ├── Input    fill, clear, get_value, select_text, is_editable
  ├── Button   click, double_click
  └── Label    get_label_text

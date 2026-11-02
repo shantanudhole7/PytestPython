@@ -79,6 +79,13 @@ def assert_selected(description: str, element, expected_value: str, timeout: int
                                timeout=timeout)
 
 
+def assert_hidden(description: str, element):
+    """
+    Call assert_hidden method of BaseTest class
+    """
+    BaseTest().assert_hidden(description=description, element=element)
+
+
 class BaseTest(Assertion):
 
     @staticmethod
@@ -122,7 +129,7 @@ class BaseTest(Assertion):
         except AssertionError as e:
             Assertion.logger_error(description, "visible", "not visible")
             raise e
-        self.assert_equal(description, True, element.is_displayed())
+        self.assert_equal(description, True, element.is_visible())
 
     def assert_text(self, description: str, element, expected: str, timeout: int = 10000):
         """
@@ -260,3 +267,24 @@ class BaseTest(Assertion):
             Assertion.logger_error(description, expected_value, element.get_selected_value())
             raise
         self.assert_equal(description, expected_value, element.get_selected_value())
+
+    def assert_hidden(self, description, element):
+        """
+        Assert that an element becomes hidden, waiting up to 10 seconds.
+
+        Logs a PASS line through assert_equal when the element is hidden,
+        or a FAIL line before re-raising when it is still visible.
+
+        Args:
+            description: What is being verified, e.g. "Verify the text box is hidden."
+            element: Core element whose visibility is checked.
+
+        Raises:
+            AssertionError: If the element is still visible after 10 seconds.
+        """
+        try:
+            expect(element.locator).to_be_hidden(timeout=10000)
+        except AssertionError as e:
+            Assertion.logger_error(description, "hidden", "visible")
+            raise e
+        self.assert_equal(description, True, element.is_hidden())

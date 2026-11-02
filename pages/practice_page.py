@@ -1,7 +1,9 @@
 from pages.base_page import BasePage
 from pages.core.base_element import BaseElement
+from pages.core.button import Button
 from pages.core.checkbox import Checkbox
 from pages.core.dropdown import Dropdown
+from pages.core.input import Input
 from pages.core.radio import Radio
 
 
@@ -15,6 +17,9 @@ class PracticePage(BasePage):
         self.chk_checkbox_2 = Checkbox(page.locator("#checkBoxOption2"))
         self.chk_checkbox_3 = Checkbox(page.locator("#checkBoxOption3"))
         self.drp_options = Dropdown(page.locator("select[name='dropdown-class-example']"))
+        self.btn_hide = Button(page.get_by_role("button", name="Hide"))
+        self.btn_show = Button(page.get_by_role("button", name="Show"))
+        self.input_hide_show_example = Input(page.get_by_placeholder("Hide/Show Example"))
 
     # noinspection PyMethodMayBeStatic
     def check_radio(self, radio: Radio) -> None:
@@ -79,4 +84,14 @@ class PracticePage(BasePage):
             value (str): Value attribute of the option, e.g. "option2".
         """
         dropdown.select_by_value(value)
+
+    # noinspection PyMethodMayBeStatic
+    def click_button(self, button: Button) -> None:
+        """
+        Click the given button.
+
+        Args:
+            button (Button): The button to click, e.g. self.btn_show.
+        """
+        button.click()
 
