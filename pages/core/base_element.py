@@ -1,4 +1,4 @@
-from playwright.sync_api import Locator, TimeoutError as PlaywrightTimeoutError, Frame
+from playwright.sync_api import Locator
 
 
 class BaseElement:
@@ -46,22 +46,6 @@ class BaseElement:
             bool: True if the element is disabled, False otherwise.
         """
         return self.locator.is_disabled()
-
-    def is_displayed(self, timeout: int = 5000) -> bool:
-        """
-        Wait up to `timeout` ms for the element to become displayed.
-
-        Args:
-            timeout (int): Timeout in ms for the element to become displayed.
-
-        Returns:
-            bool: True if the element is displayed, False otherwise.
-        """
-        try:
-            self.locator.wait_for(state="visible", timeout=timeout)
-            return True
-        except PlaywrightTimeoutError:
-            return False
 
     def is_checked(self) -> bool:
         """

@@ -62,8 +62,8 @@ report code.
 - No locators or hard-coded values in tests. Per-file values are UPPERCASE class constants; shared settings in
   `config.ini`; structured data in `data/`.
 - Assert only through `tests/base_test.py` helpers (`assert_equal`, `assert_text`, `assert_displayed`, `assert_count`,
-  `assert_url`, `assert_http_ok`, `assert_checked`, `assert_unchecked`, `assert_selected`), never bare `assert` in
-  tests.
+  `assert_url`, `assert_http_ok`, `assert_checked`, `assert_unchecked`, `assert_selected`, `assert_hidden`), never
+  bare `assert` in tests.
 - No `time.sleep()` or `wait_for_timeout()`; rely on auto-waiting and `expect`.
 - Every test has: `@pytest.mark.description("Verify ...")`, `ui` or `api`, one severity marker (`blocker`/`critical`/
   `major`/`minor`/`trivial`), and the reporting-labs docstring `"""@priority P1 @owner Shantanu @feature <area>"""`.

@@ -76,7 +76,7 @@ class ProductPage(BasePage):
             bool: True if the 'Add to Cart' button is displayed, False otherwise.
         """
         _btn_add_to_cart = self.get_button_add_to_cart(item_name)
-        return _btn_add_to_cart.is_displayed()
+        return _btn_add_to_cart.is_visible()
 
     def click_add_to_cart(self, item_name: str) -> None:
         """
